@@ -25,14 +25,7 @@ namespace Engine
 			RenderSystem::Instance()->GetMainWindow().clear();
 
 			GameWorld::Instance()->Update(deltaTime);
-
-			fixedCounter += deltaTime;
-			if (fixedCounter > PhysicsSystem::Instance()->GetFixedDeltaTime())
-			{
-				fixedCounter -= PhysicsSystem::Instance()->GetFixedDeltaTime();
-				PhysicsSystem::Instance()->Update();
-			}
-
+			GameWorld::Instance()->FixedUpdate(deltaTime);
 			GameWorld::Instance()->Render();
 			GameWorld::Instance()->LateUpdate();
 

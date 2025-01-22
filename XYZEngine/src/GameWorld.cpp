@@ -1,4 +1,5 @@
 #include "GameWorld.h"
+#include <PhysicsSystem.h>
 
 namespace Engine
 {
@@ -13,6 +14,15 @@ namespace Engine
 		for (int i = 0; i < gameObjects.size(); i++)
 		{
 			gameObjects[i]->Update(deltaTime);
+		}
+	}
+	void GameWorld::FixedUpdate(float deltaTime)
+	{
+		fixedCounter += deltaTime;
+		if (fixedCounter > PhysicsSystem::Instance()->GetFixedDeltaTime())
+		{
+			fixedCounter -= PhysicsSystem::Instance()->GetFixedDeltaTime();
+			PhysicsSystem::Instance()->Update();
 		}
 	}
 	void GameWorld::Render()
@@ -60,6 +70,8 @@ namespace Engine
 				DestroyGameObjectImmediate(gameObjects[i]);
 			}
 		}
+
+		fixedCounter = 0.f;
 	}
 
 	void GameWorld::Print() const

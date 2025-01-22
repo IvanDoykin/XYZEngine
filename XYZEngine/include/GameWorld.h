@@ -15,6 +15,7 @@ namespace Engine
 		static GameWorld* Instance();
 
 		void Update(float deltaTime);
+		void FixedUpdate(float deltaTime);
 		void Render();
 		void LateUpdate();
 
@@ -30,6 +31,8 @@ namespace Engine
 
 		GameWorld(GameWorld const&) = delete;
 		GameWorld& operator= (GameWorld const&) = delete;
+
+		float fixedCounter = 0.f;
 
 		std::vector<GameObject*> gameObjects = {};
 		std::vector<GameObject*> markedToDestroyGameObjects = {};
